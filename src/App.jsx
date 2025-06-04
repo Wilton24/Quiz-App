@@ -1,9 +1,13 @@
-function App() {}
+import Header from "./components/Header";
+import Quiz from "./components/Quiz";
 
-
-setTimeout(()=>{
-  console.log('Appspak');
-}, 2000)
-
+function App() {
+  return(
+    <>
+      < Header /> 
+      <Quiz />
+    </>
+  )
+};
 
 export default App;

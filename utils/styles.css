@@ -1,0 +1,38 @@
+.quiz-card-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.quiz-card{
+  background-color: rgb(126, 104, 75);
+  margin: 20px 30px;
+  padding: 30px 50px;
+  /* width: 1000px;
+  height: 700px; */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.question{
+  text-align: center;
+}
+.options-list{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.option button {
+  all: unset; /* resets all button styles */
+  background:rgb(140, 83, 69);
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-size: large;
+  padding: 7px;
+  border-radius: 10px;
+  margin: 10px;
+}
+.option button:hover{
+  background:rgb(203, 122, 102);
+  /* margin-top: 3px; */
+}
