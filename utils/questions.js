@@ -1,4 +1,4 @@
-export default [
+export const questions = [
   {
     id: 'q1',
     text: 'Which of the following definitions best describes React.js?',

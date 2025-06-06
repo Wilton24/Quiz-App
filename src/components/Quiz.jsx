@@ -1,21 +1,38 @@
-import { useState, useRef } from "react"
+import { useState } from "react"
 import "../../utils/styles.css"
+import Option from "./Option";
+import { questions } from "../../utils/questions";
 
 export default function Quiz() {
-  const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
-  const [userAnswers, setUserAnswers] = useState([]);
+  const [activeQuestion, setActiveQuestion] = useState(questions);
+  const [questionIndex, setActiveQuestionIndex] = useState({
+    currentScore: 0,
+    currentIndex: 0,
+    isLastIndex: false
+  });  
+
+  if(questionIndex.currentIndex === activeQuestion.length - 1) {
+    setActiveQuestionIndex(prevState => ({...prevState, isLastIndex: true}))
+  };
+
+  function handleAnswerQuestion(answer) {
+    if(answer === activeQuestion[questionIndex.currentIndex].answers[0]) {
+      setActiveQuestionIndex(prevData => ({...prevData, currentIndex: prevData.currentIndex + 1, currentScore: prevData.currentScore + 1}));
+    } else {
+      setActiveQuestionIndex(prevData => ({...prevData, currentIndex: prevData.currentIndex + 1}));
+    }            
+  };
 
   return (
-    <>
-      <div>Quiz</div>    
+    <>    
       <div className="quiz-card-container">
         <div className="quiz-card">
-          <h2 className="question">1. Which of the following definitions best describes React.js?</h2>
+          <h2 className="question">{activeQuestion[questionIndex.currentIndex].text}</h2>
           <ul className="options-list">
-              <li className="option"><button>A library to build user interfaces with help of declarative code.</button></li>
-              <li className="option"><button>A library for managing state in web applications.</button></li>
-              <li className="option"><button>A framework to build user interfaces with help of imperative code.</button></li>
-              <li className="option"><button>A library used for building mobile applications only.</button></li>
+              <Option 
+                activeQuestion={activeQuestion}
+                questionIndex={questionIndex}
+                handleAnswerQuestion={handleAnswerQuestion} />
           </ul>
         </div>
       </div>
