@@ -1,14 +1,15 @@
+import { useEffect, useState } from "react";
 import "../../utils/styles.css"
 import Option from "./Option";
+import Progress from "./Progress";
 
 
 export default function Quiz({activeQuestion, questionIndex, handleAnswerQuestion}) {
-
-
   return (
     <>    
       <div className="quiz-card-container">
           <div className="quiz-card">
+            <Progress />            
             <h2 className="question">{activeQuestion[questionIndex.currentIndex].text}</h2>
             <ul className="options-list">
                 <Option 

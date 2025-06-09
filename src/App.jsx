@@ -14,28 +14,21 @@ function App() {
 
   const quizFinished =questionIndex.currentIndex === activeQuestion.length - 1;
 
-  // useEffect(()=>{
-  //   if(questionIndex.currentIndex >= activeQuestion.length - 1) {
-  //     setActiveQuestionIndex(prevState => ({...prevState, isLastIndex: true}))
-  //   };    
-  // }, [])
-
-
-
   function handleAnswerQuestion(answer) {
-    if(quizFinished) return;
     if(answer === activeQuestion[questionIndex.currentIndex].answers[0]) {
       setActiveQuestionIndex(prevData => ({...prevData, currentIndex: prevData.currentIndex + 1, currentScore: prevData.currentScore + 1}));
     } else {
       setActiveQuestionIndex(prevData => ({...prevData, currentIndex: prevData.currentIndex + 1}));
     }            
   };
-
+  
   return(
     <>
       < Header /> 
       {quizFinished == true ?
-       <Result score={questionIndex.currentScore}/> : 
+       <Result 
+        score={questionIndex.currentScore}
+        totalitems={activeQuestion.length} /> : 
        <Quiz 
         activeQuestion={activeQuestion}
         questionIndex={questionIndex} 
