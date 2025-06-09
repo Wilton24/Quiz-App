@@ -36,3 +36,16 @@
   background:rgb(203, 122, 102);
   /* margin-top: 3px; */
 }
+
+.result-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.result-card{
+  background-color: rgb(126, 104, 75);
+  margin: 20px 30px;
+  padding: 30px 50px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
