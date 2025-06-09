@@ -16,6 +16,7 @@ export default function Quiz() {
   };
 
   function handleAnswerQuestion(answer) {
+    if(questionIndex.isLastIndex === true) return;
     if(answer === activeQuestion[questionIndex.currentIndex].answers[0]) {
       setActiveQuestionIndex(prevData => ({...prevData, currentIndex: prevData.currentIndex + 1, currentScore: prevData.currentScore + 1}));
     } else {
@@ -26,15 +27,21 @@ export default function Quiz() {
   return (
     <>    
       <div className="quiz-card-container">
-        <div className="quiz-card">
-          <h2 className="question">{activeQuestion[questionIndex.currentIndex].text}</h2>
-          <ul className="options-list">
-              <Option 
-                activeQuestion={activeQuestion}
-                questionIndex={questionIndex}
-                handleAnswerQuestion={handleAnswerQuestion} />
-          </ul>
-        </div>
+
+        {questionIndex.isLastIndex ? 
+          <div>Quiz Finished</div>:
+          <div className="quiz-card">
+            <h2 className="question">{activeQuestion[questionIndex.currentIndex].text}</h2>
+            <ul className="options-list">
+                <Option 
+                  activeQuestion={activeQuestion}
+                  questionIndex={questionIndex}
+                  handleAnswerQuestion={handleAnswerQuestion} />
+            </ul>
+          </div>          
+          }
+        
+
       </div>
     </>
 
