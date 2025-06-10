@@ -13,7 +13,10 @@ function App() {
     isLastIndex: false
   });  
 
-  const quizFinished =questionIndex.currentIndex === activeQuestion.length - 1;
+  const [isStartGame, setIsStartGame] = useState(false);
+  const [playername, setPlayername] = useState('');
+
+  const quizFinished = questionIndex.currentIndex === activeQuestion.length - 1;
 
   function handleAnswerQuestion(answer) {
     if(answer === activeQuestion[questionIndex.currentIndex].answers[0]) {
@@ -22,13 +25,43 @@ function App() {
       setActiveQuestionIndex(prevData => ({...prevData, currentIndex: prevData.currentIndex + 1}));
     }            
   };
-  
+
+  function handleSubmitPlayerName(playername){
+    if(playername.trim() === '') {
+      alert('Please enter your name');
+      return;
+    }
+    setPlayername(playername)    
+  };
+
+  function startGame(){
+    setIsStartGame(true);    
+  }
+
+
+  let content = null;
+  if(isStartGame === false){
+    content = <WelcomeCard 
+        playername={playername}
+        handleSubmitPlayerName={handleSubmitPlayerName}
+        startGame={startGame}
+        />
+  } else{
+    content = quizFinished == true ?
+       <Result 
+        score={questionIndex.currentScore}
+        totalitems={activeQuestion.length} /> : 
+       <Quiz 
+        activeQuestion={activeQuestion}
+        questionIndex={questionIndex} 
+        handleAnswerQuestion={handleAnswerQuestion}/>
+  }
+
   return(
     <>
       < Header /> 
 
-      <WelcomeCard />
-
+      {content}
       {/* {quizFinished == true ?
        <Result 
         score={questionIndex.currentScore}

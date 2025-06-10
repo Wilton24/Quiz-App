@@ -36,7 +36,7 @@ console.log(timer);
       <progress
         value={timer}
         max={TIMER}
-        className="progress-bar" />
+        className="progress-bar my-2.5" />
     </div>
   )
 }
