@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Header from "./components/Header";
+import WelcomeCard from "./components/WelcomeCard";
 import Quiz from "./components/Quiz";
 import Result from "./components/Result";
 import { questions } from "../utils/questions";
@@ -25,7 +26,10 @@ function App() {
   return(
     <>
       < Header /> 
-      {quizFinished == true ?
+
+      <WelcomeCard />
+
+      {/* {quizFinished == true ?
        <Result 
         score={questionIndex.currentScore}
         totalitems={activeQuestion.length} /> : 
@@ -33,7 +37,7 @@ function App() {
         activeQuestion={activeQuestion}
         questionIndex={questionIndex} 
         handleAnswerQuestion={handleAnswerQuestion}/>
-      }
+      } */}
     </>
   )
 };
