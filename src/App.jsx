@@ -28,13 +28,17 @@ function App() {
 
   function handleSubmitPlayerName(playername){
     if(playername.trim() === '') {
-      alert('Please enter your name');
+      alert('Name cannot be blank');
       return;
     }
     setPlayername(playername)    
   };
 
   function startGame(){
+    if(playername.trim() === '') {
+      alert('Please enter your name');
+      return;
+    }
     setIsStartGame(true);    
   }
 
@@ -54,7 +58,8 @@ function App() {
        <Quiz 
         activeQuestion={activeQuestion}
         questionIndex={questionIndex} 
-        handleAnswerQuestion={handleAnswerQuestion}/>
+        handleAnswerQuestion={handleAnswerQuestion}
+        isStartGame={isStartGame}/>
   }
 
   return(

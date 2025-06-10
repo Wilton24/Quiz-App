@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 const TIMER = 5000;
 
-export default function Progress({}){
+export default function Progress({isStartGame}){
 
   // useEffect(()=>{
   //   const questionTimer = setInterval(() => {
