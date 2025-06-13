@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Header from "./components/Header";
 import WelcomeCard from "./components/WelcomeCard";
 import Quiz from "./components/Quiz";
@@ -22,9 +22,13 @@ function App() {
     if(answer === activeQuestion[questionIndex.currentIndex].answers[0]) {
       setActiveQuestionIndex(prevData => ({...prevData, currentIndex: prevData.currentIndex + 1, currentScore: prevData.currentScore + 1}));
     } else {
-      setActiveQuestionIndex(prevData => ({...prevData, currentIndex: prevData.currentIndex + 1}));
+      nextQuestion();
     }            
   };
+
+  function nextQuestion(){
+    setActiveQuestionIndex(prevData => ({...prevData, currentIndex: prevData.currentIndex + 1}));
+  }
 
   function handleSubmitPlayerName(playername){
     if(playername.trim() === '') {
@@ -42,6 +46,9 @@ function App() {
     setIsStartGame(true);    
   }
 
+  useCallback(()=>{
+    
+  }, [])  
 
   let content = null;
   if(isStartGame === false){
@@ -59,7 +66,8 @@ function App() {
         activeQuestion={activeQuestion}
         questionIndex={questionIndex} 
         handleAnswerQuestion={handleAnswerQuestion}
-        isStartGame={isStartGame}/>
+        isStartGame={isStartGame}
+        nextQuestion={nextQuestion}/>
   }
 
   return(
