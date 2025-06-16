@@ -73,17 +73,7 @@ function App() {
   return(
     <>
       < Header /> 
-
       {content}
-      {/* {quizFinished == true ?
-       <Result 
-        score={questionIndex.currentScore}
-        totalitems={activeQuestion.length} /> : 
-       <Quiz 
-        activeQuestion={activeQuestion}
-        questionIndex={questionIndex} 
-        handleAnswerQuestion={handleAnswerQuestion}/>
-      } */}
     </>
   )
 };
