@@ -7,7 +7,6 @@ const shuffledQuestion = activeQuestion[questionIndex.currentIndex].answers.sort
     <>
       {shuffledQuestion.map(answer => {        
         return  <li key={answer} className="option"><button onClick={() => handleAnswerQuestion(answer)}>{answer}</button></li>
-              
       })}
     </>
   )
