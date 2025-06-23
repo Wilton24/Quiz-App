@@ -9,7 +9,7 @@ export default function Quiz({activeQuestion, questionIndex, handleAnswerQuestio
     <>    
       <div className="quiz-card-container">
           <div className="quiz-card">
-            <Progress isStartGame={isStartGame} nextQuestion={nextQuestion}/>            
+            <Progress key={questionIndex.currentIndex} isStartGame={isStartGame} nextQuestion={nextQuestion}/>            
             <h2 className="question">{activeQuestion[questionIndex.currentIndex].text}</h2>
             <ul className="options-list">
                 <Option 

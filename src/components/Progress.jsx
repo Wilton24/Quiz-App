@@ -1,3 +1,4 @@
+// Progress.tsx
 import { useEffect, useRef, useState } from "react";
 
 const TIMER = 5000;
@@ -7,18 +8,16 @@ export default function Progress({ nextQuestion }) {
   const intervalRef = useRef(null);
   const nextQuestionRef = useRef(nextQuestion);
 
-  // Keep nextQuestion ref updated
   useEffect(() => {
     nextQuestionRef.current = nextQuestion;
   }, [nextQuestion]);
 
   useEffect(() => {
+    setTimer(TIMER); // reset on mount (key change in parent remounts this)
     intervalRef.current = setInterval(() => {
       setTimer((prev) => {
         if (prev <= 100) {
-          // Trigger next question
-          nextQuestionRef.current();
-          // Reset timer
+          nextQuestionRef.current(); // call parent
           return TIMER;
         }
         return prev - 100;
