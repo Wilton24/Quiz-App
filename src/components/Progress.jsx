@@ -1,4 +1,3 @@
-// Progress.tsx
 import { useEffect, useRef, useState } from "react";
 
 const TIMER = 5000;
@@ -17,7 +16,7 @@ export default function Progress({ nextQuestion }) {
     intervalRef.current = setInterval(() => {
       setTimer((prev) => {
         if (prev <= 100) {
-          nextQuestionRef.current(); // call parent
+          nextQuestionRef.current(); // call parent        
           return TIMER;
         }
         return prev - 100;
