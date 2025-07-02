@@ -1,12 +1,14 @@
 
-export default function Option({activeQuestion, questionIndex, handleAnswerQuestion}){
+export default function Option({ activeQuestion, questionIndex, handleAnswerQuestion }) {
 
-const shuffledQuestion = activeQuestion[questionIndex.currentIndex].answers.sort(() => Math.random() - 0.5);
+  const shuffledQuestion = activeQuestion[questionIndex.currentIndex].answers.sort(() => Math.random() - 0.5);
+  let buttonClassName = "bg-[rgb(140,83,69)] cursor-pointer block w-full text-left text-lg p-[7px] rounded-[10px] m-[10px]"
+
 
   return (
     <>
-      {shuffledQuestion.map(answer => {        
-        return  <li key={answer} className="option"><button onClick={() => handleAnswerQuestion(answer)}>{answer}</button></li>
+      {shuffledQuestion.map(answer => {
+        return <li key={answer} className={buttonClassName}><button onClick={() => handleAnswerQuestion(answer)}>{answer}</button></li>
       })}
     </>
   )
