@@ -29,7 +29,7 @@ export default function Progress({ nextQuestion, timer }) {
 
   return (
     <div>
-      <progress value={timer} max={TIMER} className="progress-bar my-2.5" />
+      <progress value={timer} max={progressTimer} className="progress-bar my-2.5" />
     </div>
   );
 }
