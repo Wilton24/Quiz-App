@@ -4,18 +4,31 @@ import Option from "./Option";
 import Progress from "./Progress";
 
 
-export default function Quiz({ activeQuestion, questionIndex, handleAnswerQuestion, isStartGame, nextQuestion }) {
+export default function Quiz({
+  activeQuestion,
+  questionIndex,
+  handleAnswerQuestion,
+  isStartGame,
+  nextQuestion,
+  timer
+}) {
   return (
     <>
       <div className="quiz-card-container">
         <div className="quiz-card">
-          <Progress key={questionIndex.currentIndex} isStartGame={isStartGame} nextQuestion={nextQuestion} />
+          <Progress key={
+            questionIndex.currentIndex}
+            isStartGame={isStartGame}
+            nextQuestion={nextQuestion}
+            timer={timer} />
           <h2 className="question">{activeQuestion[questionIndex.currentIndex].text}</h2>
           <ul className="options-list">
             <Option
               activeQuestion={activeQuestion}
               questionIndex={questionIndex}
-              handleAnswerQuestion={handleAnswerQuestion} />
+              handleAnswerQuestion={handleAnswerQuestion}
+              timer={timer}
+            />
           </ul>
         </div>
       </div>

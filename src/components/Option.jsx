@@ -1,5 +1,8 @@
 
-export default function Option({ activeQuestion, questionIndex, handleAnswerQuestion }) {
+export default function Option({
+  activeQuestion,
+  questionIndex,
+  handleAnswerQuestion }) {
 
   // Shuffle the answers for the current question
   const shuffledQuestion = activeQuestion[questionIndex.currentIndex].answers.sort(() => Math.random() - 0.5);

@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
-const TIMER = 5000;
+// const TIMER = 5000;
 
-export default function Progress({ nextQuestion }) {
-  const [timer, setTimer] = useState(TIMER);
+export default function Progress({ nextQuestion, timer }) {
+  // const [timer, setTimer] = useState(TIMER);
+  const [progressTimer, setProgressTimer] = useState(timer);
   const intervalRef = useRef(null);
   const nextQuestionRef = useRef(nextQuestion);
 
@@ -12,12 +13,12 @@ export default function Progress({ nextQuestion }) {
   }, [nextQuestion]);
 
   useEffect(() => {
-    setTimer(TIMER); // reset on mount (key change in parent remounts this)
+    setProgressTimer(timer); // reset on mount (key change in parent remounts this)
     intervalRef.current = setInterval(() => {
-      setTimer((prev) => {
+      setProgressTimer((prev) => {
         if (prev <= 100) {
           nextQuestionRef.current(); // call parent        
-          return TIMER;
+          return timer;
         }
         return prev - 100;
       });

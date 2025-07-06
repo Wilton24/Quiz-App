@@ -70,7 +70,8 @@ function App() {
         questionIndex={questionIndex}
         handleAnswerQuestion={handleAnswerQuestion}
         isStartGame={isStartGame}
-        nextQuestion={nextQuestion} />
+        nextQuestion={nextQuestion}
+        timer={timer} />
   }
 
   return (
