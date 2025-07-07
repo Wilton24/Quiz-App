@@ -13,6 +13,8 @@ function App() {
     isLastIndex: false
   });
 
+  const [answerState, setAnswerState] = useState(false);
+
   const [isStartGame, setIsStartGame] = useState(false);
   const [playername, setPlayername] = useState('');
 
