@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
-const TIMER = 3000;
+const TIMER = 5000;
+let className = "progress-bar my-2.5";
 
-export default function Progress({ nextQuestion, timer }) {
-  // const [timer, setTimer] = useState(TIMER);
+export default function Progress({ nextQuestion, timer, cooldown }) {
   const [progressTimer, setProgressTimer] = useState(timer);
   const intervalRef = useRef(null);
   const nextQuestionRef = useRef(nextQuestion);
@@ -31,7 +31,7 @@ export default function Progress({ nextQuestion, timer }) {
 
   return (
     <div>
-      <progress value={progressTimer} max={TIMER} className="progress-bar my-2.5" />
+      <progress value={progressTimer} max={cooldown ? 3000 : TIMER} className={cooldown ? `${className} cooldown` : className} />
     </div>
   );
 }

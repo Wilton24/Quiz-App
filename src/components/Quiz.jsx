@@ -10,7 +10,8 @@ export default function Quiz({
   handleAnswerQuestion,
   isStartGame,
   nextQuestion,
-  timer
+  timer,
+  cooldown
 }) {
   return (
     <>
@@ -20,7 +21,8 @@ export default function Quiz({
             questionIndex.currentIndex}
             isStartGame={isStartGame}
             nextQuestion={nextQuestion}
-            timer={timer} />
+            timer={timer}
+            cooldown={cooldown} />
           <h2 className="question">{activeQuestion[questionIndex.currentIndex].text}</h2>
           <ul className="options-list">
             <Option

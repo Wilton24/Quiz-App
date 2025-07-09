@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
-.quiz-card-container{
+.quiz-card-container {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.quiz-card{
+
+.quiz-card {
   background-color: rgb(126, 104, 75);
   margin: 20px 30px;
   padding: 30px 50px;
@@ -14,17 +15,21 @@
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.question{
+
+.question {
   text-align: center;
 }
-.options-list{
+
+.options-list {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
+
 .option button {
-  all: unset; /* resets all button styles */
-  background:rgb(140, 83, 69);
+  all: unset;
+  /* resets all button styles */
+  background: rgb(140, 83, 69);
   cursor: pointer;
   display: block;
   width: 100%;
@@ -34,24 +39,27 @@
   border-radius: 10px;
   margin: 10px;
 }
-.option button:hover{
-  background:rgb(203, 122, 102);
+
+.option button:hover {
+  background: rgb(203, 122, 102);
   /* margin-top: 3px; */
 }
 
-.result-container{
+.result-container {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.result-card{
+
+.result-card {
   background-color: rgb(126, 104, 75);
   margin: 20px 30px;
   padding: 30px 50px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.okay-btn{
+
+.okay-btn {
   margin: 0 auto;
   font-size: larger;
   color: white;
@@ -64,10 +72,11 @@
   cursor: pointer;
 }
 
-.okay-btn:hover{
+.okay-btn:hover {
   background-color: rgb(126, 124, 124);
   border: 1px solid;
 }
+
 progress {
   -webkit-appearance: none;
   appearance: none;
@@ -92,4 +101,13 @@ progress::-webkit-progress-value {
 progress::-moz-progress-bar {
   background-color: #4caf50;
   border-radius: 10px;
+}
+
+progress.cooldown::-webkit-progress-value {
+  background-color: #f44336;
+  /* red */
+}
+
+progress.cooldown::-moz-progress-bar {
+  background-color: #f44336;
 }

@@ -13,22 +13,32 @@ function App() {
     isLastIndex: false
   });
 
-  const [answerState, setAnswerState] = useState(false);
-
   const [isStartGame, setIsStartGame] = useState(false);
   const [playername, setPlayername] = useState('');
+  const [answerState, setAnswerState] = useState('');
+  const [cooldown, setCooldown] = useState(false);
+
 
   const [isTimerExpired, setIsTimerExpired] = useState(false);
 
-  const [timer, setTimer] = useState(3000); // 3 seconds timer
+  const [timer, setTimer] = useState(5000); // 3 seconds timer
 
   const quizFinished = questionIndex.currentIndex === activeQuestion.length - 1;
 
   function handleAnswerQuestion(answer) {
     if (answer === activeQuestion[questionIndex.currentIndex].answers[0]) {
+      setAnswerState("correct");
+      // Setting timer to 3 seconds before proceeding to the next question
+      setTimer(3000);
+      setCooldown(true);
       setActiveQuestionIndex(prevData => ({ ...prevData, currentIndex: prevData.currentIndex + 1, currentScore: prevData.currentScore + 1 }));
+
     } else {
       nextQuestion();
+      setAnswerState("wrong");
+      // Setting timer to 3 seconds before proceeding to the next question
+      setTimer(3000);
+      setCooldown(true);
     }
   };
 
@@ -74,7 +84,8 @@ function App() {
         handleAnswerQuestion={handleAnswerQuestion}
         isStartGame={isStartGame}
         nextQuestion={nextQuestion}
-        timer={timer} />
+        timer={timer}
+        cooldown={cooldown} />
   }
 
   return (
