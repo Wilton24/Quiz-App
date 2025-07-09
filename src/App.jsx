@@ -19,6 +19,7 @@ function App() {
   const [playername, setPlayername] = useState('');
 
   const [isTimerExpired, setIsTimerExpired] = useState(false);
+
   const [timer, setTimer] = useState(3000); // 3 seconds timer
 
   const quizFinished = questionIndex.currentIndex === activeQuestion.length - 1;
