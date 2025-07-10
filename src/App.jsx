@@ -66,27 +66,41 @@ function App() {
 
   // }, [])
 
-  let content = null;
-  if (isStartGame === false) {
-    content = <WelcomeCard
-      playername={playername}
-      handleSubmitPlayerName={handleSubmitPlayerName}
-      startGame={startGame}
-    />
-  } else {
-    content = quizFinished == true ?
-      <Result
-        score={questionIndex.currentScore}
-        totalitems={activeQuestion.length} /> :
-      <Quiz
-        activeQuestion={activeQuestion}
-        questionIndex={questionIndex}
-        handleAnswerQuestion={handleAnswerQuestion}
-        isStartGame={isStartGame}
-        nextQuestion={nextQuestion}
-        timer={timer}
-        cooldown={cooldown} />
-  }
+  // let content = null;
+  // if (isStartGame === false) {
+  //   content = <WelcomeCard
+  //     playername={playername}
+  //     handleSubmitPlayerName={handleSubmitPlayerName}
+  //     startGame={startGame}
+  //   />
+  // } else {
+  //   content = quizFinished == true ?
+  //     <Result
+  //       score={questionIndex.currentScore}
+  //       totalitems={activeQuestion.length} /> :
+  //     <Quiz
+  //       activeQuestion={activeQuestion}
+  //       questionIndex={questionIndex}
+  //       handleAnswerQuestion={handleAnswerQuestion}
+  //       isStartGame={isStartGame}
+  //       nextQuestion={nextQuestion}
+  //       timer={timer}
+  //       cooldown={cooldown} />
+  // }
+
+  let content = quizFinished == true ?
+    <Result
+      score={questionIndex.currentScore}
+      totalitems={activeQuestion.length} /> :
+    // `12
+    <Quiz
+      activeQuestion={activeQuestion}
+      questionIndex={questionIndex}
+      handleAnswerQuestion={handleAnswerQuestion}
+      isStartGame={isStartGame}
+      nextQuestion={nextQuestion}
+      timer={timer}
+      cooldown={cooldown} />
 
   return (
     <>

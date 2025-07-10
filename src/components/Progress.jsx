@@ -4,7 +4,9 @@ const TIMER = 5000;
 let className = "progress-bar my-2.5";
 
 export default function Progress({ nextQuestion, timer, cooldown }) {
+  // progress timer, default to 5000ms // if cooldown is true, set to 3000ms
   const [progressTimer, setProgressTimer] = useState(timer);
+
   const intervalRef = useRef(null);
   const nextQuestionRef = useRef(nextQuestion);
 
@@ -13,16 +15,14 @@ export default function Progress({ nextQuestion, timer, cooldown }) {
   }, [nextQuestion]);
 
   useEffect(() => {
-    setProgressTimer(timer);
     intervalRef.current = setInterval(() => {
       setProgressTimer((prev) => {
         if (prev <= 100) {
-          nextQuestionRef.current(); // call parent        
+          // call parent        
+          nextQuestionRef.current();
           return timer;
         }
         return prev - 100;
-
-
       });
     }, 100);
 
