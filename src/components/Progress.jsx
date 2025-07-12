@@ -4,34 +4,42 @@ let className = "progress-bar my-2.5";
 
 export default function Progress({ nextQuestion, timer, cooldown }) {
   const [progressTimer, setProgressTimer] = useState(timer);
-
   const intervalRef = useRef(null);
   const nextQuestionRef = useRef(nextQuestion);
 
-  // Keep nextQuestion always up to date
+  // Keep nextQuestion function in sync
   useEffect(() => {
     nextQuestionRef.current = nextQuestion;
   }, [nextQuestion]);
 
-  // Reset the progress timer when cooldown or timer changes
+  // Reset progress timer when cooldown or timer changes
   useEffect(() => {
     setProgressTimer(timer);
   }, [cooldown, timer]);
 
-  // Start progress countdown
+  // Countdown logic
   useEffect(() => {
+    clearInterval(intervalRef.current); // clear any previous intervals
+
     intervalRef.current = setInterval(() => {
       setProgressTimer((prev) => {
         if (prev <= 100) {
-          nextQuestionRef.current();
-          return timer; // reset to new timer value
+          clearInterval(intervalRef.current);
+
+          if (cooldown) {
+            // Proceed to next question *only* after cooldown ends
+            nextQuestionRef.current();
+          }
+
+          return 0; // stop progress
         }
+
         return prev - 100;
       });
     }, 100);
 
     return () => clearInterval(intervalRef.current);
-  }, [timer]);
+  }, [cooldown, timer]);
 
   return (
     <div>
