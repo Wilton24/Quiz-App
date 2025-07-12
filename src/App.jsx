@@ -26,24 +26,28 @@ function App() {
   const quizFinished = questionIndex.currentIndex === activeQuestion.length - 1;
 
   function handleAnswerQuestion(answer) {
-    if (answer === activeQuestion[questionIndex.currentIndex].answers[0]) {
-      setAnswerState("correct");
-      // Setting timer to 3 seconds before proceeding to the next question
-      setTimer(3000);
-      setCooldown(true);
-      setActiveQuestionIndex(prevData => ({ ...prevData, currentIndex: prevData.currentIndex + 1, currentScore: prevData.currentScore + 1 }));
+    setCooldown(true);
+    setTimer(3000);
 
-    } else {
-      nextQuestion();
-      setAnswerState("wrong");
-      // Setting timer to 3 seconds before proceeding to the next question
-      setTimer(3000);
-      setCooldown(true);
-    }
-  };
+    const isCorrect = answer === activeQuestion[questionIndex.currentIndex].answers[0];
+    setAnswerState(isCorrect ? 'correct' : 'wrong');
+
+    // Whether right or wrong, next question happens after cooldown
+    nextQuestion();
+  }
 
   function nextQuestion() {
-    setActiveQuestionIndex(prevData => ({ ...prevData, currentIndex: prevData.currentIndex + 1 }));
+    setActiveQuestionIndex(prevData => ({
+      ...prevData,
+      currentIndex: prevData.currentIndex + 1
+    }));
+
+    // Reset the timer and cooldown after 3 seconds
+    setTimeout(() => {
+      setCooldown(false);
+      setTimer(5000); // restore to answering mode
+      setAnswerState(''); // optional: reset visual state
+    }, 3000);
   }
 
   function handleSubmitPlayerName(playername) {
