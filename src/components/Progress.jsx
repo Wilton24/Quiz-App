@@ -2,7 +2,12 @@ import { useEffect, useRef, useState } from "react";
 
 let className = "progress-bar my-2.5";
 
-export default function Progress({ nextQuestion, timer, cooldown, isStartGame, handleAnswerQuestion }) {
+export default function Progress({
+  nextQuestion,
+  timer,
+  cooldown,
+  handleAnswerQuestion,
+}) {
   const [progressTimer, setProgressTimer] = useState(timer);
   const intervalRef = useRef(null);
 
@@ -22,14 +27,14 @@ export default function Progress({ nextQuestion, timer, cooldown, isStartGame, h
     clearInterval(intervalRef.current);
 
     intervalRef.current = setInterval(() => {
-      setProgressTimer(prev => {
+      setProgressTimer((prev) => {
         if (prev <= 100) {
           clearInterval(intervalRef.current);
 
           if (cooldown) {
             nextQuestionRef.current();
           } else {
-            handleAnswerRef.current(null); // ❌ Time ran out
+            handleAnswerRef.current(null); // time ran out, auto wrong
           }
 
           return 0;

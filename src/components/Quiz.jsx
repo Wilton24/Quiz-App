@@ -9,7 +9,9 @@ export default function Quiz({
   isStartGame,
   nextQuestion,
   timer,
-  cooldown
+  cooldown,
+  answerState,
+  userAnswer,
 }) {
   return (
     <div className="quiz-card-container">
@@ -20,17 +22,17 @@ export default function Quiz({
           nextQuestion={nextQuestion}
           timer={timer}
           cooldown={cooldown}
-          handleAnswerQuestion={handleAnswerQuestion} // 🔥
+          handleAnswerQuestion={handleAnswerQuestion}
         />
-        <h2 className="question">
-          {activeQuestion[questionIndex.currentIndex].text}
-        </h2>
+        <h2 className="question">{activeQuestion[questionIndex.currentIndex].text}</h2>
         <ul className="options-list">
           <Option
             activeQuestion={activeQuestion}
             questionIndex={questionIndex}
             handleAnswerQuestion={handleAnswerQuestion}
             cooldown={cooldown}
+            answerState={answerState}
+            userAnswer={userAnswer}
           />
         </ul>
       </div>
