@@ -20,6 +20,7 @@ export default function Quiz({
           nextQuestion={nextQuestion}
           timer={timer}
           cooldown={cooldown}
+          handleAnswerQuestion={handleAnswerQuestion} // 🔥
         />
         <h2 className="question">
           {activeQuestion[questionIndex.currentIndex].text}
@@ -29,7 +30,7 @@ export default function Quiz({
             activeQuestion={activeQuestion}
             questionIndex={questionIndex}
             handleAnswerQuestion={handleAnswerQuestion}
-            cooldown={cooldown} // ✅ pass cooldown here
+            cooldown={cooldown}
           />
         </ul>
       </div>

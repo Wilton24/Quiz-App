@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import Header from "./components/Header";
 import WelcomeCard from "./components/WelcomeCard";
 import Quiz from "./components/Quiz";
@@ -9,54 +9,51 @@ function App() {
   const [activeQuestion, setActiveQuestion] = useState(questions);
   const [questionIndex, setActiveQuestionIndex] = useState({
     currentScore: 0,
-    currentIndex: 0,
-    isLastIndex: false
+    currentIndex: 0
   });
 
   const [isStartGame, setIsStartGame] = useState(false);
   const [playername, setPlayername] = useState('');
   const [answerState, setAnswerState] = useState('');
   const [cooldown, setCooldown] = useState(false);
+  const [timer, setTimer] = useState(5000);
 
-
-  const [isTimerExpired, setIsTimerExpired] = useState(false);
-
-  const [timer, setTimer] = useState(5000); // 3 seconds timer
-
-  const quizFinished = questionIndex.currentIndex === activeQuestion.length - 1;
+  const quizFinished = questionIndex.currentIndex === activeQuestion.length;
 
   function handleAnswerQuestion(answer) {
     setCooldown(true);
     setTimer(3000);
 
-    const isCorrect = answer === activeQuestion[questionIndex.currentIndex].answers[0];
-    setAnswerState(isCorrect ? 'correct' : 'wrong');
+    const correct = activeQuestion[questionIndex.currentIndex].answers[0];
 
-    // Whether right or wrong, next question happens after cooldown
-    nextQuestion();
+    if (answer && answer === correct) {
+      setAnswerState("correct");
+      setActiveQuestionIndex(prev => ({
+        ...prev,
+        currentIndex: prev.currentIndex + 1,
+        currentScore: prev.currentScore + 1
+      }));
+    } else {
+      setAnswerState("wrong");
+      nextQuestion();
+    }
   }
 
   function nextQuestion() {
-    setActiveQuestionIndex(prevData => ({
-      ...prevData,
-      currentIndex: prevData.currentIndex + 1
-    }));
-
-    // Reset the timer and cooldown after 3 seconds
     setTimeout(() => {
       setCooldown(false);
-      setTimer(5000); // restore to answering mode
-      setAnswerState(''); // optional: reset visual state
+      setTimer(5000);
+      setAnswerState('');
     }, 3000);
   }
 
-  function handleSubmitPlayerName(playername) {
-    if (playername.trim() === '') {
+  function handleSubmitPlayerName(name) {
+    if (name.trim() === '') {
       alert('Name cannot be blank');
       return;
     }
-    setPlayername(playername)
-  };
+    setPlayername(name);
+  }
 
   function startGame() {
     if (playername.trim() === '') {
@@ -66,52 +63,30 @@ function App() {
     setIsStartGame(true);
   }
 
-  // useCallback(() => {
-
-  // }, [])
-
-  // let content = null;
-  // if (isStartGame === false) {
-  //   content = <WelcomeCard
-  //     playername={playername}
-  //     handleSubmitPlayerName={handleSubmitPlayerName}
-  //     startGame={startGame}
-  //   />
-  // } else {
-  //   content = quizFinished == true ?
-  //     <Result
-  //       score={questionIndex.currentScore}
-  //       totalitems={activeQuestion.length} /> :
-  //     <Quiz
-  //       activeQuestion={activeQuestion}
-  //       questionIndex={questionIndex}
-  //       handleAnswerQuestion={handleAnswerQuestion}
-  //       isStartGame={isStartGame}
-  //       nextQuestion={nextQuestion}
-  //       timer={timer}
-  //       cooldown={cooldown} />
-  // }
-
-  let content = quizFinished == true ?
-    <Result
-      score={questionIndex.currentScore}
-      totalitems={activeQuestion.length} /> :
-    // `12
-    <Quiz
-      activeQuestion={activeQuestion}
-      questionIndex={questionIndex}
-      handleAnswerQuestion={handleAnswerQuestion}
-      isStartGame={isStartGame}
-      nextQuestion={nextQuestion}
-      timer={timer}
-      cooldown={cooldown} />
+  let content = !isStartGame
+    ? <WelcomeCard
+      playername={playername}
+      handleSubmitPlayerName={handleSubmitPlayerName}
+      startGame={startGame}
+    />
+    : quizFinished
+      ? <Result score={questionIndex.currentScore} totalitems={activeQuestion.length} />
+      : <Quiz
+        activeQuestion={activeQuestion}
+        questionIndex={questionIndex}
+        handleAnswerQuestion={handleAnswerQuestion}
+        isStartGame={isStartGame}
+        nextQuestion={nextQuestion}
+        timer={timer}
+        cooldown={cooldown}
+      />;
 
   return (
     <>
-      < Header />
+      <Header />
       {content}
     </>
-  )
-};
+  );
+}
 
 export default App;
